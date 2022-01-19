@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Body!</title>
+</head>
+<body>
+<h1>Hello from "hello edit controller"</h1>
+
+<form action="/products" method="POST">
+    <label for="pid">Product ID:</label><br>
+    <input type="text" id="pid" name="pid"><br>
+    <label for="pname">Product name: </label><br>
+    <input type="text" id="pname" name="pname"><br>
+    <label for="price">Product Price:</label><br>
+    <input type="text" id="price" name="price">
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

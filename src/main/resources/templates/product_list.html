@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Body!</title>
+</head>
+<body>
+<h1>Hello from "hello controller"</h1>
+<table >
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.price}"></td>
+        <td>
+            <form action="/products/delete" method="DELETE">
+                <input type="input" name="id" th:value="${p.id}" hidden>
+                <input type="submit" value="Delete">
+
+        </form>
+        <a th:href="@{/products/delete(id=${p.id})}" th:text="Delete"></a></td>
+        <td><a th:href="@{/products/edit(id=${p.id})}" th:text="Edit"></a></td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>14</td>
+        <td>10</td>
+    </tr>
+</table>
+
+
+<form action="/products" method="POST">
+    <label for="pid">Product ID:</label><br>
+    <input type="text" id="pid" name="pid"><br>
+    <label for="pname">Product name: </label><br>
+    <input type="text" id="pname" name="pname"><br>
+    <label for="price">Product Price:</label><br>
+    <input type="text" id="price" name="price">
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>
