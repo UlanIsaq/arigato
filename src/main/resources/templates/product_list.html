@@ -7,7 +7,8 @@
 </head>
 <body>
 <h1>Hello from "hello controller"</h1>
-<table >
+<h1>List of Products:</h1>
+<table>
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -22,10 +23,17 @@
                 <input type="input" name="id" th:value="${p.id}" hidden>
                 <input type="submit" value="Delete">
 
-        </form>
-        <a th:href="@{/products/delete(id=${p.id})}" th:text="Delete"></a></td>
+            </form>
+            <a th:href="@{/products/delete(id=${p.id})}" th:text="Delete"></a></td>
         <td><a th:href="@{/products/edit(id=${p.id})}" th:text="Edit"></a></td>
+
+        <td><form action="/products/disc" method="GET">
+            <input type="input" name="id" th:value="${p.id}" hidden>
+            <input type="text" id="di" name="did">
+            <input type="submit" value="applyDisc">
+        </form></td>
     </tr>
+
     <tr>
         <td>16</td>
         <td>14</td>
@@ -33,15 +41,13 @@
     </tr>
 </table>
 
+<a href="/products/new"> Create Product</a>
 
-<form action="/products" method="POST">
-    <label for="pid">Product ID:</label><br>
-    <input type="text" id="pid" name="pid"><br>
-    <label for="pname">Product name: </label><br>
-    <input type="text" id="pname" name="pname"><br>
-    <label for="price">Product Price:</label><br>
-    <input type="text" id="price" name="price">
-    <input type="submit" value="submit">
+<form action="/products/discount" method="GET">
+    <label for="dis">Discount</label><br>
+    <input type="text" id="dis" name="dis">
+    <input type="submit" value="APPLY">
 </form>
+
 </body>
 </html>

@@ -21,15 +21,19 @@ public class ProductsController {
         public String getProducts(Model model){
 
             model.addAttribute("products", productList);
-
+            model.addAttribute("product",new Product());
             return "product_list";
         }
-
+@GetMapping("/new")
+public String newProduct(Model model){
+           model.addAttribute("product", new Product());
+            return "new_product";
+}
         @PostMapping
-    public String createProduct(@RequestParam Long pid, @RequestParam String pname, @RequestParam Double price){
+    public String createProduct(Product p){
             System.out.println("I am handling post to  this endpoint");
-            System.out.println(pid+" "+pname+" "+price);
-            productList.add(new Product(pid,pname,price));
+            System.out.println(p.getId()+" "+p.getName()+" "+p.getPrice());
+            productList.add(p);
             return "redirect:/products";
         }
 
@@ -80,6 +84,44 @@ public class ProductsController {
             }*/
             return"redirect:/products";
         }
+int num=0;
+        @GetMapping("/discount")
+    public String applyDiscount(@RequestParam String dis)
+    {
 
+        if(!productList.isEmpty()) {
+            if (dis.equalsIgnoreCase("discount1")&&num==0) {
+                for (Product p : productList) {
+                    p.setPrice(p.getPrice() * 0.7);
+                    num++;
+                    System.out.println(num);
+
+                }
+            }
+        }
+        return "redirect:/products";
+    }
+    @GetMapping("/disc")
+    public String applDiscount(@RequestParam Long id, @RequestParam String did)
+    {
+
+       /* for (Product p:productList) {
+            if(p.getId()==id && num==0){
+                p.setPrice(p.getPrice()*0.7);
+                num++;
+            }
+        }*/
+
+        for (Product p:productList) {
+
+            if(p.getId()==id&&did.equalsIgnoreCase("discount") && p.getDiscount()==0){
+                p.setPrice(p.getPrice()*0.7);
+                num = p.getDiscount();
+                num++;
+                p.setDiscount(num);
+            }
+        }
+        return "redirect:/products";
+    }
 
 }

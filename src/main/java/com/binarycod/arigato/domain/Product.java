@@ -4,6 +4,15 @@ public class Product {
     Long id;
     String name;
     Double price;
+    Integer discount = 0;
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 
     public Long getId() {
         return id;
@@ -34,4 +43,5 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+    public Product(){}
 }
