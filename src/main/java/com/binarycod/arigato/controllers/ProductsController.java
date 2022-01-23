@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -42,8 +43,42 @@ public class ProductsController {
             return "redirect:/products";
         }
           @GetMapping("/edit")
-        public String editProduct(@RequestParam Long id){
+        public String editProduct(@RequestParam Long id, Model model){
+              Optional<Product> productOptional = productList
+                      .stream()
+                      .filter(p -> p.getId().equals(id))
+                      .findFirst();
+              if(!productOptional.isPresent())
+              {
+                  return "redirect:/products";
+              }
+
+             model.addAttribute("product", productOptional.get());
+
             return "edit_product";
+        }
+
+        @PostMapping("/edit")
+    public String savePorduct(Product product)
+        {
+            Optional <Product> productOld = productList
+                    .stream()
+                    .filter(p -> p.getId().equals(product.getId()))
+                    .findFirst();
+            if(productOld.isPresent())
+            {
+                productList.remove(productOld.get());
+                productList.add(product);
+            }
+            /*for(Product p: productList){
+                if(p.getId().equals(product.getId()))
+                {
+                    p.setName(product.getName());
+                    p.setPrice(product.getPrice());
+
+                }
+            }*/
+            return"redirect:/products";
         }
 
 
