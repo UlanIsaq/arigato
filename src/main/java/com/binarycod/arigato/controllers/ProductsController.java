@@ -1,6 +1,9 @@
 package com.binarycod.arigato.controllers;
 
 import com.binarycod.arigato.domain.Product;
+import com.binarycod.arigato.repository.ProductRepository;
+import com.binarycod.arigato.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +19,18 @@ public class ProductsController {
 
     List<Product> productList = new ArrayList<>();
 
+    @Autowired
+    ProductService productService;
 
+    String error="";
         @GetMapping
         public String getProducts(Model model){
+Integer numberOfProducts = productService.getCount();
+            model.addAttribute("products", productService.getProducts());
+            //model.addAttribute("product",new Product()); it was for POST method, but when we move it to another  page this model became useless
+            model.addAttribute("productCount",numberOfProducts);
 
-            model.addAttribute("products", productList);
-            model.addAttribute("product",new Product());
+            model.addAttribute("error",error);
             return "product_list";
         }
 @GetMapping("/new")
@@ -33,27 +42,23 @@ public String newProduct(Model model){
     public String createProduct(Product p){
             System.out.println("I am handling post to  this endpoint");
             System.out.println(p.getId()+" "+p.getName()+" "+p.getPrice());
-            productList.add(p);
+            productService.createProduct(p);
             return "redirect:/products";
         }
 
         @GetMapping("/delete")
     public String deleteProduct(@RequestParam Long id){
             System.out.println("I will delte"+id);
-            productList = productList
-                    .stream()
-                    .filter(p -> !p.getId().equals(id))
-                    .collect(Collectors.toList());
+           productService.deleteProduct(id);
             return "redirect:/products";
         }
           @GetMapping("/edit")
         public String editProduct(@RequestParam Long id, Model model){
-              Optional<Product> productOptional = productList
-                      .stream()
-                      .filter(p -> p.getId().equals(id))
-                      .findFirst();
+
+              Optional<Product> productOptional = productService.getProduct(id);
               if(!productOptional.isPresent())
               {
+                  error = "No such product in out store!";
                   return "redirect:/products";
               }
 

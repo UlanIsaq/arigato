@@ -5,6 +5,15 @@ public class Product {
     String name;
     Double price;
     Integer discount = 0;
+    Integer size;
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     public Integer getDiscount() {
         return discount;
@@ -43,5 +52,7 @@ public class Product {
         this.name = name;
         this.price = price;
     }
-    public Product(){}
+    public Product(long id, String p_name, double price, int size){}
+    public Product() {
+    }
 }

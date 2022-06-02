@@ -11,7 +11,7 @@
 
 <form th:action="@{/products/edit}" method="POST" th:object="${product}">
     <label for="pid">Product ID:</label><br>
-    <input type="text" id="pid" name="pid" th:field="*{id}"><br>
+    <input type="text" id="pid" name="pid" th:field="*{id}" readonly><br>
     <label for="pname">Product name: </label><br>
     <input type="text" id="pname" name="pname" th:field="*{name}"><br>
     <label for="price">Product Price:</label><br>
