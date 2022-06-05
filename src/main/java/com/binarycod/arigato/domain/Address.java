@@ -1,6 +1,14 @@
 package com.binarycod.arigato.domain;
 
 public class Address {
+    private Integer id;
+    private String address1;
+    private String address2;
+    private String city;
+    private String state;
+    private String country;
+    private String zipCode;
+
     public String getAddress1() {
         return address1;
     }
@@ -44,11 +52,11 @@ public class Address {
     public String getZipCode() {
         return zipCode;
     }
-
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-private Integer id;
+
+
 
     public Integer getId() {
         return id;
@@ -58,11 +66,16 @@ private Integer id;
         this.id = id;
     }
 
-    private String address1;
-    private String address2;
-    private String city;
-    private String state;
-    private String country;
-    private String zipCode;
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
