@@ -71,11 +71,11 @@ catch (DataAccessException dae){
         address.setId(rs.getInt("ad_id"));
       address.setAddress1(rs.getString("address1"));
 
-        address.setAddress1(rs.getString("address2"));
-        address.setAddress1(rs.getString("city"));
-        address.setAddress1(rs.getString("state"));
-        address.setAddress1(rs.getString("country"));
-        address.setAddress1(rs.getString("zipCode"));
+        address.setAddress2(rs.getString("address2"));
+        address.setCity(rs.getString("city"));
+        address.setState(rs.getString("state"));
+        address.setCountry(rs.getString("country"));
+        address.setZipCode(rs.getString("zipCode"));
       Store store = new Store();
         store.setId(rs.getInt("id"));
         store.setName(rs.getString("name"));
