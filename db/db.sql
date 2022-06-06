@@ -1,33 +1,38 @@
+drop database arigato_db;
+
 create database arigato_db;
+
 create user 'arigato_db_user'@'localhost' identified by '1qaz';
 grant all privileges on arigato_db.* to 'arigato_db_user'@'localhost';
-
 flush privileges;
 
 create table product(
-id bigint primary key not null,
+id bigint primary key not null auto_increment,
 name varchar(100),
 price double,
 size int);
 
 
 create table address (
-id int primary key not null,
-street varchar(200),
-houseNumber varchar(100),
+id int primary key not null auto_increment,
+address1 varchar(120),
+address2 varchar(120),
+city varchar(100),
+state char(20),
+country char(2),
 zipCode varchar(100)
 );
 
 
 create table store(
-id int primary key not null,
+id int primary key not null auto_increment,
 name varchar(100),
 address_id int,
 foreign key (address_id) references address(id)
 );
 
 create table store_product (
-id int primary key not null,
+id int primary key not null auto_increment,
 store_id int,
 product_id bigint,
 quantity int
